@@ -5,4 +5,6 @@
     <string name="action_search">Search</string>
     <string name="title_activity_search">SearchActivity</string>
     <string name="search_menu">Search</string>
+    <string name="searchable_label">Search Query</string>
+    <string name="searchable_hint">Enter photo tags</string>
 </resources>
