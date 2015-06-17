@@ -1,6 +1,9 @@
 package com.asuscomm.geniusware.flickrbrowser;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
@@ -31,7 +34,6 @@ public class MainActivity extends BaseActivity {
         processPhotos.execute();
     }
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -51,7 +53,30 @@ public class MainActivity extends BaseActivity {
             return true;
         }
 
+        if(id == R.id.menu_search){
+            Intent intent = new Intent(this, SearchActivity.class);
+            startActivity(intent);
+            return true;
+        }
+
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(flickrRecyclerViewAdapter != null){
+            String query = getSavedPrefferenceData(FLICKR_QUERY);
+            if(query.length() > 0){
+                ProcessPhotos processPhotos = new ProcessPhotos(query,true);
+                processPhotos.execute();
+            }
+        }
+    }
+
+    private String getSavedPrefferenceData(String key){
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        return sharedPref.getString(key, "");
     }
 
     public class ProcessPhotos extends GetFlickrJsonData {

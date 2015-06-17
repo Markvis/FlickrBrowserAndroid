@@ -3,7 +3,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
-    android:padding="2dp">
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:paddingTop="10dp">
 
     <ImageView
         android:id="@+id/thumbnail"
@@ -20,5 +22,6 @@
         android:layout_marginLeft="8dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
+        android:textColor="@color/flickrSecondaryTextColor"
         android:maxLines="3"/>
 </LinearLayout>
