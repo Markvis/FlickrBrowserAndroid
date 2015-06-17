@@ -1,0 +1,7 @@
+<resources>
+
+    <style name="Theme.Flickr" parent="Theme.Base">
+        <item name="android:navigationBarColor">?colorPrimaryDark</item>
+    </style>
+
+</resources>
