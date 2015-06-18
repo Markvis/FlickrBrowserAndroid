@@ -30,8 +30,8 @@ public class MainActivity extends BaseActivity {
         mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        ProcessPhotos processPhotos = new ProcessPhotos("android", true);
-        processPhotos.execute();
+        flickrRecyclerViewAdapter = new FlickrRecyclerViewAdapter(MainActivity.this, new ArrayList<Photo>());
+        mRecyclerView.setAdapter(flickrRecyclerViewAdapter);
     }
 
     @Override
@@ -53,7 +53,7 @@ public class MainActivity extends BaseActivity {
             return true;
         }
 
-        if(id == R.id.menu_search){
+        if (id == R.id.menu_search) {
             Intent intent = new Intent(this, SearchActivity.class);
             startActivity(intent);
             return true;
@@ -65,16 +65,14 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        if(flickrRecyclerViewAdapter != null){
-            String query = getSavedPrefferenceData(FLICKR_QUERY);
-            if(query.length() > 0){
-                ProcessPhotos processPhotos = new ProcessPhotos(query,true);
-                processPhotos.execute();
-            }
+        String query = getSavedPrefferenceData(FLICKR_QUERY);
+        if (query.length() > 0) {
+            ProcessPhotos processPhotos = new ProcessPhotos(query, true);
+            processPhotos.execute();
         }
     }
 
-    private String getSavedPrefferenceData(String key){
+    private String getSavedPrefferenceData(String key) {
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         return sharedPref.getString(key, "");
     }
@@ -93,10 +91,9 @@ public class MainActivity extends BaseActivity {
 
         public class ProcessData extends DownloadJsonData {
 
-            protected void onPostExecute(String webData){
+            protected void onPostExecute(String webData) {
                 super.onPostExecute(webData);
-                flickrRecyclerViewAdapter = new FlickrRecyclerViewAdapter(MainActivity.this, getMPhotos());
-                mRecyclerView.setAdapter(flickrRecyclerViewAdapter);
+                flickrRecyclerViewAdapter.loadViewData(getPhotos());
             }
         }
     }
