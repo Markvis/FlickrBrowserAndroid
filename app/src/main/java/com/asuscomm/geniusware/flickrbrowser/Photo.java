@@ -1,9 +1,13 @@
 package com.asuscomm.geniusware.flickrbrowser;
 
+import java.io.Serializable;
+
 /**
  * Created by markfavis on 6/10/15.
  */
-public class Photo {
+public class Photo implements Serializable {
+    private static final long serialVerisonUID = 1L;
+
     private String mTitle;
     private String mAuthor;
     private String mAuthorID;
@@ -18,6 +22,10 @@ public class Photo {
         this.mLink = mLink;
         this.mTags = mTags;
         this.mImage = mImage;
+    }
+
+    public static long getSerialVerisonUID() {
+        return serialVerisonUID;
     }
 
     public String getmTitle() {

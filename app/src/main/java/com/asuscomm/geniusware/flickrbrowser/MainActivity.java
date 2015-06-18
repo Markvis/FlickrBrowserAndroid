@@ -9,7 +9,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,12 +37,15 @@ public class MainActivity extends BaseActivity {
         mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(this, mRecyclerView, new RecyclerItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                Toast.makeText(MainActivity.this, "Normal Tap", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(MainActivity.this, "Normal Tap", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onItmeLongClick(View view, int position) {
-                Toast.makeText(MainActivity.this, "Long Tap", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(MainActivity.this, "Long Tap", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(MainActivity.this, ViewPhotoDetailsActivity.class);
+                intent.putExtra(PHOTO_TRANSFER, flickrRecyclerViewAdapter.getPhoto(position));
+                startActivity(intent);
             }
         }));
     }

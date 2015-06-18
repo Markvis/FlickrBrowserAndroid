@@ -52,4 +52,8 @@ public class FlickrRecyclerViewAdapter extends RecyclerView.Adapter<FlickrImageV
                 .into(flickrImageViewHolder.thumbnail);
         flickrImageViewHolder.title.setText(photoItem.getmTitle());
     }
+
+    public Photo getPhoto(int position){
+        return (null != mPhotosList ? mPhotosList.get(position) : null);
+    }
 }
