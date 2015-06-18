@@ -38,14 +38,17 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onItemClick(View view, int position) {
                 //Toast.makeText(MainActivity.this, "Normal Tap", Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onItmeLongClick(View view, int position) {
-                //Toast.makeText(MainActivity.this, "Long Tap", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(MainActivity.this, ViewPhotoDetailsActivity.class);
                 intent.putExtra(PHOTO_TRANSFER, flickrRecyclerViewAdapter.getPhoto(position));
                 startActivity(intent);
+            }
+
+            @Override
+            public void onItemLongClick(View view, int position) {
+//                Toast.makeText(MainActivity.this, "Long Tap", Toast.LENGTH_SHORT).show();
+//                Intent intent = new Intent(MainActivity.this, ViewPhotoDetailsActivity.class);
+//                intent.putExtra(PHOTO_TRANSFER, flickrRecyclerViewAdapter.getPhoto(position));
+//                startActivity(intent);
             }
         }));
     }
